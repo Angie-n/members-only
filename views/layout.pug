@@ -3,9 +3,11 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascripts/dateConverter.js' defer)
   body
     header 
-      h1 Members Only
+      h1 
+        a(href='/') Members Only
       nav 
         ul 
           if user == undefined
