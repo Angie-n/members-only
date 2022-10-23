@@ -3,3 +3,17 @@ extends layout
 block content
   h1 Keep it Discreet
   p Tattletales will be publically shamed.
+  
+  if user !== undefined 
+    button(onclick='location.href = "/create-post";') Create Post
+  for message in messages 
+    div.message
+      h2.message-title= message.title
+      p.message-content= message.content 
+      if user !== undefined   
+        p.message-date= message.timestamp 
+        p.message-user= message.user.username
+      else 
+        p.message-date.redacted Unknown Date
+        p.message-user.redacted Unknown User
+
