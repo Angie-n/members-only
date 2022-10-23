@@ -1,0 +1,27 @@
+extends layout 
+
+block content 
+    h1= title
+    form(method='POST' action='') 
+        div 
+            label(for='first_name') First Name: 
+            input(id='first_name' name='first_name' type='text' required value=(undefined===incomplete_user ? '' : incomplete_user.first_name))
+        div 
+            label(for='last_name') Last Name: 
+            input(id='last_name' name='last_name' type='text' required value=(undefined===incomplete_user ? '' : incomplete_user.last_name))
+        div 
+            label(for='username') Username: 
+            input(id='username' name='username' type='text' required value=(undefined===incomplete_user ? '' : incomplete_user.username))
+        div 
+            label(for='password') Password: 
+            input(id='password' name='password' type='password' required value=(undefined===incomplete_user ? '' : incomplete_user.password))
+        div 
+            label(for='password_reenter') Re-enter password: 
+            input(id='password_reenter' name='password_reenter' type='password' required value=(undefined===password_reenter ? '' : password_reenter))
+        button(type='submit') Sign Up 
+
+    if errors
+        ul
+        for error in errors
+            li.red-msg!= error.msg
+    

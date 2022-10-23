@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+    h1= title
+    form(method='POST' action='') 
+        div 
+            label(for='username') Username: 
+            input(id='username' name='username' type='text' required value=(undefined === attempted_username ? '' : attempted_username))
+        div 
+            label(for='password') Password: 
+            input(id='password' name='password' type='password' required)
+        button(type='submit') Login
+
+    if error
+        p.red-msg= error
+    
