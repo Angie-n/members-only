@@ -5,10 +5,16 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
 const User = require('../models/user');
+const Message = require('../models/message');
 
 //index
 router.get('/', function(req, res, next) {
-  res.render('index', {user: req.user});
+  Message.find({})
+    .populate('user')
+    .exec((err, messages) => {
+      if(err) next(err);
+      res.render('index', {user: req.user, messages: messages});
+    })
 });
 
 //secret stuff
@@ -99,5 +105,31 @@ router.get('/logout', function(req, res, next){
     res.redirect('/');
   });
 });
+
+//create post
+router.get('/create-post', function(req, res, next) {
+  res.render('create_post', {title: 'Create Post', user: req.user});
+});
+
+router.post('/create-post', [
+  body('post_title').trim().escape(),
+  body('post_content').escape(),
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    let message = new Message({
+      title: req.body.post_title,
+      timestamp: Date.now(),
+      user: req.user,
+      content: req.body.post_content
+    });
+
+    if(!errors.isEmpty()) res.render('create_post', { title: 'Create Post', user: req.user, errors: errors.array()});
+    else {
+      message.save((err) => {if(err) next(err)})
+      res.redirect('/');
+    }
+  }
+]);
 
 module.exports = router;
