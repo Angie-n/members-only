@@ -9,10 +9,12 @@ block content
   for message in messages 
     div.message
       h2.message-title= message.title
-      p.message-content= message.content 
+      p.message-content!= message.content 
       if user !== undefined   
         p.message-date= message.timestamp 
         p.message-user= message.user.username
+        if user.is_admin 
+          button.delete-post(onclick='location.href = "/delete-post/' + message._id + '"') Delete
       else 
         p.message-date.redacted Unknown Date
         p.message-user.redacted Unknown User

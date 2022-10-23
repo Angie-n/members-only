@@ -132,4 +132,21 @@ router.post('/create-post', [
   }
 ]);
 
+//delete post
+router.get('/delete-post/:id', function(req, res, next) {
+  Message.findById(req.params.id)
+    .populate('user')
+    .exec((err, message) => {
+      if(err) next(err);
+      res.render('delete_post', {title: 'Delete Post', user: req.user, message: message});
+    })
+});
+
+router.post('/delete-post/:id', function(req, res, next) {
+  Message.findByIdAndDelete(req.params.id, (err, doc) => {
+    if(err) next(err);
+    res.redirect('/');
+  });
+});
+
 module.exports = router;
