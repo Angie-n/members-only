@@ -1,0 +1,17 @@
+extends layout 
+
+block content   
+    h1=title 
+
+    if user == undefined 
+        p You must be logged in to create posts.
+    else
+        form(method='POST' action="") 
+            div 
+                label(for='post_title') Title: 
+                input(name='post_title' id='post_title' type='text')
+            div 
+                label(for='post_content') Content: 
+                textarea(name='post_content' id='post_content')
+            button(type='submit') Post It!
+        
