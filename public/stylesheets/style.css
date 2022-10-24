@@ -1,8 +1,201 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+  padding: 0;
+  margin: 0;
 }
 
-a {
-  color: #00B7FF;
+body {
+  font-size: 10px;
+  background-color: rgb(5, 5, 5);
+  color: white;
+}
+
+ul {
+  list-style: none;
+}
+
+h1 {
+  padding-left: 15px;
+  font-size: 3.5em;
+}
+
+a:hover, button:hover {
+  text-shadow: 0px 0px 10px white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  min-height: 70px;
+  background-color: purple;
+  background: linear-gradient(30deg, purple, red, red, orange);
+  margin-bottom: 20px;
+}
+
+header a {
+  text-decoration: none;
+  color: inherit;
+}
+
+header > * {
+  width: 50%;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 1.8em;
+}
+
+#welcome-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100vw;
+  height: 70vh;
+  min-height: 200px;
+  font-size: max(1.5vw, 18px);
+  text-shadow: 2px 2px 4px rgb(181, 181, 181);
+}
+
+#create-post-btn {
+  font-size: max(1vw, 18px);
+  position: absolute;
+  bottom: 0;
+  width: 150px;
+  min-width: 40%;
+  min-height: 40px;
+  height: 10%;
+  margin: auto;
+  border-radius: 50% 50% 0 0;
+  background-color: inherit;
+  border: white 5px double;
+  color: white;
+}
+
+.message {
+  position: relative;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  justify-content: center;
+  width: 85%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid rgb(138, 138, 138);
+  border-left: 10px purple solid;
+  border-right: 10px purple solid;
+  border-radius: 10px;
+  font-size: 1.8em;
+  margin: 10px auto 10px auto;
+  background-color: white;
+  color: black;
+}
+
+.message-title {
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+}
+
+.message-content {
+  grid-column: 1 / 3;
+  grid-row: 3 / 4;
+}
+
+.message-timestamp {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.message-user {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.delete-post {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: rgb(38, 37, 37);
+  border: none;
+  background-color: inherit;
+  font-size: 1.2em;
+}
+
+.delete-post:hover {
+  color: gray;
+}
+
+.red-msg {
+  color: rgb(164, 0, 0);
+}
+
+.redacted {
+  filter: blur(5px);
+}
+
+form {
+  background-color: white;
+  color: black;
+  padding: 15px;
+  font-size: max(2em, 1.8vw);
+  width: calc(100% - 30px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form button {
+  margin-top: 20px;
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: purple;
+  font-size: 1.2em;
+}
+
+form input, form textarea {
+  width: 20%;
+  height: max(20px, 1.8vw)
+}
+
+form textarea {
+  width: 80%;
+  height: 200px;
+}
+
+.background-icon {
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  width: 100vw;
+  text-align: center;
+  font-size: 80vh;
+  color: rgb(23, 23, 23);
+}
+
+#create-post-form > div {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 400px) {
+  header {
+    flex-direction: column;
+    height: 80px;
+    padding-bottom: 10px;
+  }
+
+  header > * {
+    width: 100%;
+    text-align: center;
+  }
+
+  form input, form textarea {
+    width: 100%;
+  }
 }
