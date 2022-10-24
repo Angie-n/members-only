@@ -1,21 +1,26 @@
 extends layout
 
 block content
-  h1 Keep it Discreet
-  p Tattletales will be publically shamed.
-  
-  if user !== undefined 
-    button(onclick='location.href = "/create-post";') Create Post
-  for message in messages 
-    div.message
-      h2.message-title= message.title
-      p.message-content!= message.content 
-      if user !== undefined   
-        p.message-date= message.timestamp 
-        p.message-user= message.user.username
-        if user.is_admin 
-          button.delete-post(onclick='location.href = "/delete-post/' + message._id + '"') Delete
-      else 
-        p.message-date.redacted Unknown Date
-        p.message-user.redacted Unknown User
+  div#welcome-container
+    if user !== undefined 
+      h1 Keep it Discreet, #{user.username}
+      p Tattletales will be publically shamed.
+      button#create-post-btn(onclick='location.href = "/create-post";') Add to the Void
+    else  
+      h1 Nothing Shady Here
+      p Enjoy your visit!
+  div#message-container
+    for message in messages 
+      div.message
+        h2.message-title= message.title
+        p.message-content!= message.content 
+        if user !== undefined   
+          p.message-date= message.timestamp 
+          p.message-user= message.user.username
+          if user.is_admin 
+            button.delete-post(onclick='location.href = "/delete-post/' + message._id + '"') 
+              i.fa-solid.fa-trash
+        else 
+          p.message-date.redacted Unknown Date
+          p.message-user.redacted Unknown User
 
