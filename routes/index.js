@@ -53,7 +53,7 @@ router.post('/sign-up', [
   body('last_name').trim().escape(),
   body('username').trim().escape(),
   check('username', "Username is already taken.").custom(value => {
-    return User.findOne({username: value})
+    return User.findOne({username: new RegExp('^' + value + '$', 'i')})
       .then(user => {
         if(user != null) return Promise.reject("Username is already taken.")
       });
