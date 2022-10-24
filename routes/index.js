@@ -70,7 +70,7 @@ router.post('/sign-up', [
       is_admin: false
     })
 
-    if(!errors.isEmpty()) res.render('sign_up', { title: 'Create a new account', incomplete_users: user, errors: errors.array(), password_reenter: req.body.password_reenter});
+    if(!errors.isEmpty()) res.render('sign_up', { title: 'Create a new account', incomplete_user: user, errors: errors.array(), password_reenter: req.body.password_reenter});
     else {
       bcrypt.hash(user.password, 10, (err, hash) => {
         if(err) next(err);
