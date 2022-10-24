@@ -6,7 +6,7 @@ block content
     if user == undefined 
         p You must be logged in to create posts.
     else
-        form(method='POST' action="") 
+        form#create-post-form(method='POST' action="") 
             div 
                 label(for='post_title') Title: 
                 input(name='post_title' id='post_title' type='text')

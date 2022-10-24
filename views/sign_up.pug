@@ -3,6 +3,10 @@ extends layout
 block content 
     h1= title
     form(method='POST' action='') 
+        if errors
+            ul
+                for error in errors
+                    li.red-msg!= error.msg
         div 
             label(for='first_name') First Name: 
             input(id='first_name' name='first_name' type='text' required value=(undefined===incomplete_user ? '' : incomplete_user.first_name))
@@ -19,9 +23,5 @@ block content
             label(for='password_reenter') Re-enter password: 
             input(id='password_reenter' name='password_reenter' type='password' required value=(undefined===password_reenter ? '' : password_reenter))
         button(type='submit') Sign Up 
-
-    if errors
-        ul
-        for error in errors
-            li.red-msg!= error.msg
+    i.fa-solid.fa-user-secret.background-icon
     

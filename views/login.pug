@@ -3,6 +3,8 @@ extends layout
 block content 
     h1= title
     form(method='POST' action='') 
+        if error
+            p.red-msg= error
         div 
             label(for='username') Username: 
             input(id='username' name='username' type='text' required value=(undefined === attempted_username ? '' : attempted_username))
@@ -11,6 +13,5 @@ block content
             input(id='password' name='password' type='password' required)
         button(type='submit') Login
 
-    if error
-        p.red-msg= error
+    i.fa-solid.fa-user-secret.background-icon
     
