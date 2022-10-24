@@ -10,6 +10,7 @@ const Message = require('../models/message');
 //index
 router.get('/', function(req, res, next) {
   Message.find({})
+    .sort({timestamp: -1})
     .populate('user')
     .exec((err, messages) => {
       if(err) next(err);
