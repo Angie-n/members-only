@@ -2,7 +2,7 @@ extends layout
 
 block content
   div#welcome-container
-    if user !== undefined 
+    if user !== undefined && user.is_member
       h1 Keep it Discreet, #{user.username}
       p Tattletales will be publically shamed.
       button#create-post-btn(onclick='location.href = "/create-post";') Add to the Void
@@ -14,7 +14,7 @@ block content
       div.message
         h2.message-title= message.title
         p.message-content!= message.content 
-        if user !== undefined   
+        if user !== undefined && user.is_member
           p.message-date= message.timestamp 
           p.message-user= message.user.username
           if user.is_admin 
