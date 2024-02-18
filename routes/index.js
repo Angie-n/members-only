@@ -9,9 +9,12 @@ const Message = require('../models/message');
 
 //index
 router.get('/', function(req, res, next) {
+  includedFields = 'title content';
+  if(req.user && req.user.is_member) includedFields = 'title content user timestamp';
   Message.find({})
     .sort({timestamp: -1})
     .populate('user')
+    .select(includedFields)
     .exec((err, messages) => {
       if(err) next(err);
       res.render('index', {user: req.user, messages: messages});
@@ -116,6 +119,11 @@ router.post('/create-post', [
   body('post_title').trim().escape(),
   body('post_content').escape(),
   (req, res, next) => {
+    if(!req.user) {
+      res.status(403).send("Must be logged in to create posts.");
+      next();
+    }
+
     const errors = validationResult(req);
 
     let message = new Message({
@@ -136,18 +144,24 @@ router.post('/create-post', [
 //delete post
 router.get('/delete-post/:id', function(req, res, next) {
   Message.findById(req.params.id)
-    .populate('user')
-    .exec((err, message) => {
-      if(err) next(err);
-      res.render('delete_post', {title: 'Delete Post', user: req.user, message: message});
-    })
+  .populate('user')
+  .exec((err, message) => {
+    if(err) next(err);
+    res.render('delete_post', {title: 'Delete Post', user: req.user, message: message});
+  })
 });
 
 router.post('/delete-post/:id', function(req, res, next) {
-  Message.findByIdAndDelete(req.params.id, (err, doc) => {
-    if(err) next(err);
-    res.redirect('/');
-  });
+  if(!req.user || !req.user.is_admin) {
+    res.status(403).send("Must be an admin to delete posts.");
+    next();
+  }
+  else {
+    Message.findByIdAndDelete(req.params.id, (err, doc) => {
+      if(err) next(err);
+      res.redirect('/');
+    });
+  }
 });
 
 module.exports = router;

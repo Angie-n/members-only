@@ -2,7 +2,7 @@ extends index
 
 block content 
     h1=title
-    if user.is_admin 
+    if user != undefined && user.is_admin 
         form#delete-post(method='POST' action='')
             p Are you sure you want to delete this post?
             div
