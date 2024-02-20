@@ -2,9 +2,6 @@
 A message board app utilizing passportjs to authenticate users. Users are given different levels of access depending on their authority, which is confirmed via secret passwords.
 
 
-## Project Screen Shot(s)
-
-
 ## Installation and Setup 
 
 
